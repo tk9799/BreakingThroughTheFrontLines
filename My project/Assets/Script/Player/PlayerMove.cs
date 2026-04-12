@@ -12,7 +12,7 @@ public class PlayerMove : MonoBehaviour
     private void FixedUpdate()
     {
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        Debug.Log(input);
+        
         transform.position += (Vector3)(input.normalized * moveSpeed * Time.fixedDeltaTime);
     }
 }

@@ -32,8 +32,15 @@ public class BulletMove : MonoBehaviour
         if (traveledDistance >= range)
         {
             // Poolへ返却してほしいことを通知
-            onRelease.Invoke(this);
+            //onRelease?.Invoke(this);
+            BulletRelease();
         }
+    }
+
+    public void BulletRelease()
+    {
+        // Poolへ返却してほしいことを通知
+        onRelease?.Invoke(this);
     }
 
     // Poolから戻すとき用に初期化
