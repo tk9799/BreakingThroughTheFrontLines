@@ -9,8 +9,8 @@ public class EnemyMove : MonoBehaviour
     
     private void Update()
     {
-        transform.LookAt(targetTransform);
-
-        transform.position += transform.forward * moveSpeed;
+        transform.position =Vector2.MoveTowards(transform.position, 
+            targetTransform.position, moveSpeed * Time.deltaTime);
+        //Debug.Log(transform.position);
     }
 }
