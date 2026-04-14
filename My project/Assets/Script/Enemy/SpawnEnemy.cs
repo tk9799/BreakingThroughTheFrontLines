@@ -31,14 +31,14 @@ public class SpawnEnemy : MonoBehaviour
     public List<GameObject> enemyList = new List<GameObject>();
 
     [Header("配置する敵の最大値")]
-    [SerializeField] public int maxEnemyObjectCount = 10;
+    [SerializeField] public int maxEnemyObjectCount = 0;
 
     [Header("敵が追従するターゲット")]
     [SerializeField] private Transform targetTransform;
 
     private void Start()
     {
-        enemyPool = new EnemyPool<EnemyMove>(enemyObject.GetComponent<EnemyMove>(), 15, transform);
+        enemyPool = new EnemyPool<EnemyMove>(enemyObject.GetComponent<EnemyMove>(), maxEnemyObjectCount, transform);
     }
 
     private void Update()

@@ -29,10 +29,19 @@ public class ConverstationManager : MonoBehaviour
     // 文字表示中フラグ
     private bool isTyping = false;
 
+    // 会話を終了するかの判定
+    private bool isConverstationFinished = false;
+
     [Header("文字送り速度")]
     [SerializeField] private float characterForwardingSpeed = 0.0f;
 
     private bool isConverstationActive = false;
+
+    [Header("会話終了までプレイヤーの移動を禁止するためにアタッチするクラス")]
+    [SerializeField] private PlayerMove playerMove = null;
+
+    [Header("会話終了まで敵がスポーンしないようにするためにアタッチするクラス")]
+    [SerializeField] private SpawnEnemy spawnEnemy = null;
 
     private void Start()
     {
@@ -41,6 +50,16 @@ public class ConverstationManager : MonoBehaviour
 
     private void Update()
     {
+        // 会話がすべて終了している場合
+        if (isConverstationFinished)
+        {
+            gameObject.SetActive(false);
+
+            //処理を終えて何もしない
+            //return;
+        }
+
+
         if (Input.GetMouseButtonDown(0))
         {
             if (!isConverstationActive)
@@ -58,6 +77,12 @@ public class ConverstationManager : MonoBehaviour
     {
         isConverstationActive = true;
         converstationUI.SetActive(true);
+
+        // プレイヤーの移動を禁止
+        playerMove.enabled = false;
+
+        // 敵のスポーンを禁止
+        spawnEnemy.enabled = false;
 
         currentDialogueIndex = 0;
         currentSentenceIndex = 0;
@@ -120,5 +145,17 @@ public class ConverstationManager : MonoBehaviour
     {
         converstationUI.SetActive(false);
         isConverstationActive = false;
+
+        // プレイヤーの操作ができるようにする
+        playerMove.enabled = true;
+
+        // 敵のスポーン開始
+        spawnEnemy.enabled = true;
+
+        if(playerMove.enabled&&spawnEnemy.enabled)
+        {
+            // すべての会話が終了した
+            isConverstationFinished = true;
+        }
     }
 }
