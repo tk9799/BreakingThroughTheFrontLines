@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyLife : MonoBehaviour
@@ -5,6 +6,11 @@ public class EnemyLife : MonoBehaviour
     [SerializeField] private int myHp = 0;
 
     private EnemyPool<EnemyMove> enemyPool;
+
+    public static event Action<int> onAddScore;
+
+    [Header("敵を倒したときに加算されるスコア")]
+    [SerializeField] private int addScore = 0;
 
     /// <summary>
     /// Poolの参照をするためのメソッド
@@ -26,6 +32,8 @@ public class EnemyLife : MonoBehaviour
 
     private void DieProcess()
     {
+        onAddScore?.Invoke(addScore);
+
         enemyPool.Release(GetComponent<EnemyMove>());
     }
 }
