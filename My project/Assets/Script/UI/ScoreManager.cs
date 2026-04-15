@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -39,5 +40,10 @@ public class ScoreManager : MonoBehaviour
     private void UpdateScoreUI()
     {
         scoreText.text = "Score : " + score;
+
+        if (score > 5000)
+        {
+            SceneManager.LoadScene("ClearScene");
+        }
     }
 }
