@@ -2,6 +2,9 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// 会話のセリフを管理するクラス
+/// </summary>
 [System.Serializable]
 public class ConverstationEvent
 {
@@ -9,6 +12,9 @@ public class ConverstationEvent
     public string[] sentences;
 }
 
+/// <summary>
+/// 会話イベントの進行と表示を管理しているクラス
+/// </summary>
 public class ConverstationManager : MonoBehaviour
 {
     // テキスト表示
@@ -53,6 +59,7 @@ public class ConverstationManager : MonoBehaviour
         // 会話がすべて終了している場合
         if (isConverstationFinished)
         {
+            // 会話UIを非表示にする
             gameObject.SetActive(false);
 
             //処理を終えて何もしない
@@ -62,6 +69,7 @@ public class ConverstationManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            // 会話がアクティブでない場合は会話を開始する
             if (!isConverstationActive)
             {
                 StartConverstation();
@@ -94,47 +102,65 @@ public class ConverstationManager : MonoBehaviour
     private IEnumerator TypeSentence(string sentence)
     {
         isTyping = true;
+
+        // テキストを空にする
         converstationText.text = "";
+
         // **\n を正しく改行に変換** 
         sentence = sentence.Replace("\\n", "\n");
+
+        // 文字を一つずつ表示する
         foreach (char letter in sentence.ToCharArray())
         {
             converstationText.text += letter;
 
             // 文字送り速度 
+            // characterForwardingSpeedの時間が経つと次の文字が表示される
             yield return new WaitForSeconds(characterForwardingSpeed);
         }
         isTyping = false;
     }
+
     private void NextSentence() 
     {
         if (isTyping) 
         {
             StopAllCoroutines();
+
+            // 現在のセリフを完全に表示する
             converstationText.text = converstationEvents[currentDialogueIndex].
                 sentences[currentSentenceIndex].Replace("\\n", "\n"); 
             isTyping = false; 
         }
         else 
         {
-            currentSentenceIndex++; 
+            // 次のセリフに進む
+            currentSentenceIndex++;
+
+            // 現在の会話イベント内のセリフがまだある場合は次のセリフを表示する
             if (currentSentenceIndex < converstationEvents[currentDialogueIndex].
                 sentences.Length) 
             {
+                // 次のセリフを表示する
                 StartCoroutine(TypeSentence(converstationEvents[currentDialogueIndex].
                     sentences[currentSentenceIndex])); 
             }
             else 
-            { 
+            {
+                // 現在の会話イベント内のセリフがすべて表示された場合は次の会話イベントに進む
                 currentSentenceIndex = 0;
-                currentDialogueIndex++; 
+                currentDialogueIndex++;
+
+                // 次の会話イベントがまだある場合は次の会話イベントの最初のセリフを表示する
                 if (currentDialogueIndex < converstationEvents.Length) 
                 {
+                    // 次の会話イベントの最初のセリフを表示する
                     StartCoroutine(TypeSentence(converstationEvents[currentDialogueIndex].
                         sentences[currentSentenceIndex])); 
                 }
                 else 
                 {
+                    // すべての会話イベントが終了した場合は会話を終了する
                     CloseConvert();
                 }
             }
@@ -152,7 +178,8 @@ public class ConverstationManager : MonoBehaviour
         // 敵のスポーン開始
         spawnEnemy.enabled = true;
 
-        if(playerMove.enabled&&spawnEnemy.enabled)
+        // プレイヤーの移動と敵のスポーンが両方とも有効になっている場合
+        if (playerMove.enabled&&spawnEnemy.enabled)
         {
             // すべての会話が終了した
             isConverstationFinished = true;

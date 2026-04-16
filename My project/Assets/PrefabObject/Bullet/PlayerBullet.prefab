@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletDamage
   damage: 2
+  bulletMove: {fileID: -3369921995608986113}
 --- !u!61 &-4805404000756508457
 BoxCollider2D:
   m_ObjectHideFlags: 0
