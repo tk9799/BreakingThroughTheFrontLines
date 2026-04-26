@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyHitJudgement : MonoBehaviour
 {
@@ -31,6 +32,13 @@ public class EnemyHitJudgement : MonoBehaviour
         // ライフを減らす
         myLife -= decreaseLife;
         Debug.Log("Player Life : " + myLife);
+
+        if (myLife == 0)
+        {
+            // ライフが0になったら、ゲームオーバー処理を行う
+            Debug.Log("Game Over!");
+            SceneManager.LoadScene("GameOverScene");
+        }
     }
 
     /// <summary>
