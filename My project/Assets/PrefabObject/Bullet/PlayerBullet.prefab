@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f706511319875b40a2a4f76d84b3f4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletDamage
-  damage: 2
+  damage: 4
   bulletMove: {fileID: -3369921995608986113}
 --- !u!61 &-4805404000756508457
 BoxCollider2D:

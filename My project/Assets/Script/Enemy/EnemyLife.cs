@@ -12,6 +12,12 @@ public class EnemyLife : MonoBehaviour
     // スコア加算のAction変数
     public static event Action<int> onAddScore;
 
+    // プレイヤー強化のゲージ加算に使うAction変数
+    public static event Action<int> OnAddReinforcementNumber;
+
+    [Header("敵を倒したときに加算される強化ゲージの数")]
+    [SerializeField] private int addNumber = 0;
+
     [Header("敵を倒したときに加算されるスコア")]
     [SerializeField] private int addScore = 0;
 
@@ -39,7 +45,7 @@ public class EnemyLife : MonoBehaviour
     /// <param name="damage"></param>
     public void TakeDamage(int damage)
     {
-        Debug.Log("ダメージを受けた");
+        //Debug.Log("ダメージを受けた");
 
         // 敵のHPからダメージ値を引く
         myHp -= damage;
@@ -58,6 +64,8 @@ public class EnemyLife : MonoBehaviour
     {
         // スコア加算のActionを呼び出し他のクラスにあるonAddScoreも実行する
         onAddScore?.Invoke(addScore);
+
+        OnAddReinforcementNumber?.Invoke(10);
 
         // 敵が倒れたときのActionを呼び出し他のクラスにあるOnEnemyDeadも実行する
         OnEnemyDead?.Invoke(gameObject);
