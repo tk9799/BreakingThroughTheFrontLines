@@ -7,7 +7,12 @@ public class ShootBullet : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
 
     [Header("飛ばす弾の位置")]
-    [SerializeField] private Transform firePoint;
+    [SerializeField] private Transform[] firePoints;
+
+    [Header("弾幕を発射する数")]
+    [SerializeField] public int currentFireCount = 0;
+
+    public int maxFireCount => firePoints.Length;
 
     [Header("弾の速度")]
     [SerializeField] float bulletSpeed = 10f;
@@ -16,10 +21,23 @@ public class ShootBullet : MonoBehaviour
     [SerializeField] GetMouseDirection getMouseDirection;
 
     [Header("射程")]
-    [SerializeField] private float bulletRange = 0.0f;
+    [SerializeField] public float bulletRange = 0.0f;
 
+    [Header("ダメージの初期値")]
+    [SerializeField] private int initialDamageValue = 0;
+
+    [Header("弾のダメージ")]
+    [SerializeField] public int currentDamage = 0;
+
+    // 連射速度
     [Header("射撃後のクールタイム")]
-    [SerializeField] float fireInterval = 0.2f;
+    [SerializeField] public float fireInterval = 0.2f;
+
+    [Header("発射間隔")]
+    [SerializeField] private float shotSpacing = 0.5f;
+
+    [Header("弾を扇状で飛ばす際の角度")]
+    [SerializeField] private float spreadAngle = 0.0f;
 
     // 連射時に使うタイマー
     private float timer = 0.0f;
@@ -39,6 +57,8 @@ public class ShootBullet : MonoBehaviour
         // 引数に弾のプレハブ、プールに生成する数、生成元を渡す
         bulletPool = new BulletPool<BulletMove>
             (bulletPrefab.GetComponent<BulletMove>(), 100, transform);
+
+        currentDamage = initialDamageValue;
 
         //LineRenderの線の太さ
         lineRender.startWidth = 0.04f; 
@@ -66,27 +86,68 @@ public class ShootBullet : MonoBehaviour
         // タイマーがfireInterval以上になったらShoot()を呼び出して、タイマーを0にする
         if (timer >= fireInterval)
         {
-            Shoot();
+            FanShaped();
             timer = 0f;
         }
     }
 
+    
+
     /// <summary>
-    /// 弾を発射する際に呼び出されるメソッド
+    /// 扇状の弾幕を飛ばす処理
     /// </summary>
-    private void Shoot() 
+    private void FanShaped()
     {
-        // 弾のオブジェクトプールから弾を取得
-        BulletMove bulletMove = bulletPool.Get();
+        for (int i = 0; i < currentFireCount; i++)
+        {
+            if (i >= firePoints.Length) break;
 
-        // 弾の位置をfirePointに設定
-        bulletMove.transform.position = firePoint.position;
+            BulletMove bulletMove = bulletPool.Get();
 
-        // 弾の返却イベントを設定
-        bulletMove.onRelease = bulletPool.Release;
+            BulletDamage bulletDamage = bulletMove.GetComponent<BulletDamage>();
 
-        // 弾を飛ばす際に必要な情報を弾の移動スクリプトに渡す
-        bulletMove.Init(direction, bulletSpeed, bulletRange);
+            bulletDamage.damage = currentDamage;
+
+            // 発射方向に対して垂直なベクトル
+            // 発射位置に対して横方向に横方向になり左右に並ぶようになる
+            Vector2 perpendicuar = new Vector2(-direction.y, direction.x);
+
+            // 中心基準に並べる
+            // 発射位置をずらす処理
+            // 処理がループするたびに位置が変わる
+            float offset = (i - (currentFireCount - 1) * 0.5f)
+                * shotSpacing;
+
+            // 飛ばす位置を回転させる処理
+            float angle = (i - (currentFireCount - 1) * 0.5f) * spreadAngle;
+
+            // angleの数だけ回転させる
+            Vector2 shotDirection = Quaternion.Euler(0.0f, 0.0f, angle) * direction;
+
+            // 発射位置
+            Vector2 spawnPosition = (Vector2)transform.position + perpendicuar
+                * offset;
+
+            bulletMove.transform.position = spawnPosition;
+
+            // 弾の返却イベントを設定
+            bulletMove.onRelease -= bulletPool.Release;
+            bulletMove.onRelease -= BulletDamageInitialization;
+
+            bulletMove.onRelease += bulletPool.Release;
+            bulletMove.onRelease += BulletDamageInitialization;
+
+            // 弾を飛ばす際に必要な情報を弾の移動スクリプトに渡す
+            // 扇状に飛ばすためdirectionを回転させたshotDirectionを渡す
+            bulletMove.Init(shotDirection, bulletSpeed, bulletRange);
+        }
+    }
+
+    private void BulletDamageInitialization(BulletMove bulletMove)
+    {
+        BulletDamage bulletDamage = bulletMove.GetComponent<BulletDamage>();
+
+        bulletDamage.damage = 0;
     }
 
     /// <summary>

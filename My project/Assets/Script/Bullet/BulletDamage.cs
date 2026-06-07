@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class BulletDamage : MonoBehaviour
 {
-    [Header("敵に与えるダメージ量")]
-    [SerializeField] public int damage = 0;
+    // 弾のダメージ値を設定する変数
+    public int damage = 0;
 
     // 弾の移動処理をするクラスの変数
     [SerializeField] private BulletMove bulletMove;

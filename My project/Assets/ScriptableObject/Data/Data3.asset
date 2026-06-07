@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f1de06ba8fa784d8a6b13c2b4d0b7e, type: 3}
+  m_Name: Data3
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
+  upgradeName: BulletRange
+  description: "\u5C04\u7A0BUP"
+  upgradeType: 2
+  upgradeValue: 5
+  upgradeValueFloat: 3
