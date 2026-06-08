@@ -76,7 +76,9 @@ public class LevelUpUIManager : MonoBehaviour
         CloseLevelUpUI();
     }
 
-    // 弾幕を飛ばす方向を増やす処理が上手くいっていない
+    /// <summary>
+    /// 強化するステータスの上昇させる数値
+    /// </summary>
     private void ApplyUpgrade(UpgradeData data)
     {
         switch (data.upgradeType)
