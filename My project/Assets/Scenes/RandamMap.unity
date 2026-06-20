@@ -280,7 +280,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &386148607
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -311,7 +311,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -519,11 +519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomManager
   roomPrefabs:
   - {fileID: 8123016991794177488, guid: 160d6d0d67817284790f625cdb72ff9e, type: 3}
-  - {fileID: 8123016991794177488, guid: b61fc87519b4cdf4a863a29e3abdf9f0, type: 3}
-  - {fileID: 8123016991794177488, guid: 9d9cc62d766091d468197373e6468f4e, type: 3}
   - {fileID: 8123016991794177488, guid: 2921fc10fd7471447b6056291489ae1d, type: 3}
-  - {fileID: 8123016991794177488, guid: 3e6696d4cbaa2e14194c56ba64cb03e1, type: 3}
-  - {fileID: 8123016991794177488, guid: 5bbe63e7b5ae6b2459bea8445f67091f, type: 3}
   roomCount: 4
 --- !u!4 &760079165
 Transform:

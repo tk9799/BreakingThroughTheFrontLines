@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ public class RoomManager : MonoBehaviour
 
     // static型で他のクラスから呼ばれやすくなる
     public static RoomManager instance;
+
+    //public event Action OnPlayerEnterRoom;
 
     private void Awake()
     {
@@ -29,7 +32,7 @@ public class RoomManager : MonoBehaviour
         {
             for (int y = 0; y < roomCount; y++)
             {
-                SpawnRoom(new Vector3(x * 20f, y * 20f, 0f));
+                SpawnRoom(new Vector3(x * 20.5f, y * 20.5f, 0f));
             }
         }
     }
@@ -40,7 +43,7 @@ public class RoomManager : MonoBehaviour
     public void SpawnRoom(Vector3 position)
     {
         // Listの中のオブジェクトを１つ選ぶ
-        int index = Random.Range(0, roomPrefabs.Count);
+        int index = UnityEngine.Random.Range(0, roomPrefabs.Count);
 
         Instantiate(roomPrefabs[index], position, Quaternion.identity);
     }
