@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerShooter : MonoBehaviour
 {
     [Header("弾プレハブ")]
-    [SerializeField] private GameObject bulletPrefab = null;
+    [SerializeField] private PlayerBullet bulletPrefab = null;
 
     [Header("発射位置")]
     [SerializeField] private Transform shotPoint = null;
@@ -14,29 +14,57 @@ public class PlayerShooter : MonoBehaviour
     [Header("発射間隔")]
     [SerializeField] private float shotInterval = 0.1f;
 
+    //現在の射撃方向
+    private Vector2 shotDirection = Vector2.zero;
+
     //発射タイマー
     private float shotTimer = 0f;
+
+    /// <summary>
+    /// 射撃方向
+    /// </summary>
+    public Vector2 ShotDirection => shotDirection;
 
     /// <summary>
     /// 更新処理
     /// </summary>
     private void Update()
     {
+        //マウス位置をワールド座標に変換
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        //Z座標を補正
+        mousePosition.z = 0f;
+
+        //プレイヤーからマウスへの方向を取得
+        shotDirection = (mousePosition - transform.position).normalized;
+
         //発射タイマーを更新
         shotTimer += Time.deltaTime;
 
-        //Zキー押下中
-        if (Input.GetKey(KeyCode.Z))
+        //左クリック押下中
+        if (Input.GetMouseButton(0))
         {
             //発射間隔経過
             if (shotTimer >= shotInterval)
             {
-                //弾を生成
-                Instantiate(bulletPrefab, shotPoint.position, Quaternion.identity);
+                Shoot();
 
-                //タイマーリセット
+                //タイマーをリセット
                 shotTimer = 0f;
             }
         }
+    }
+
+    /// <summary>
+    /// 弾を発射する処理
+    /// </summary>
+    private void Shoot()
+    {
+        //弾を生成
+        PlayerBullet bullet = Instantiate(bulletPrefab, shotPoint.position, Quaternion.identity);
+
+        //弾の移動方向を設定
+        bullet.SetDirection(shotDirection);
     }
 }

@@ -18,6 +18,9 @@ public class PlayerStatus : MonoBehaviour
     //SpriteRendererコンポーネント
     private SpriteRenderer spriteRenderer = null;
 
+    //
+    public bool IsParryActive { get; private set; }
+
     /// <summary>
     /// 残機
     /// </summary>
@@ -30,18 +33,6 @@ public class PlayerStatus : MonoBehaviour
     {
         //コンポーネント取得
         spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    /// <summary>
-    /// テスト用
-    /// 後で消す
-    /// </summary>
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Damage();
-        }
     }
 
     /// <summary>
@@ -98,6 +89,15 @@ public class PlayerStatus : MonoBehaviour
 
         //無敵状態を解除
         isInvincible = false;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="value"></param>
+    public void SetParry(bool value)
+    {
+        IsParryActive = value;
     }
 
     /// <summary>
