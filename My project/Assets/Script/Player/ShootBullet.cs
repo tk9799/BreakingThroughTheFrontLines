@@ -155,6 +155,9 @@ public class ShootBullet : MonoBehaviour
     /// </summary>
     private void OnDrawGizmos()
     {
+        if (!Application.isPlaying)
+            return;
+
         // Gizmosの色を赤に設定
         Gizmos.color = Color.red;
 

@@ -12,10 +12,11 @@ public class RoomManager : MonoBehaviour
 
     private GameObject[,] rooms = new GameObject[0, 0];
 
+    public event Action<EnteringRoomJudgment> OnSwitchRoom;
+
     // static型で他のクラスから呼ばれやすくなる
     public static RoomManager instance;
 
-    //public event Action OnPlayerEnterRoom;
 
     private void Awake()
     {
@@ -46,5 +47,10 @@ public class RoomManager : MonoBehaviour
         int index = UnityEngine.Random.Range(0, roomPrefabs.Count);
 
         Instantiate(roomPrefabs[index], position, Quaternion.identity);
+    }
+
+    public void SwitchRoomCamera(EnteringRoomJudgment switchRoom)
+    {
+        OnSwitchRoom?.Invoke(switchRoom);
     }
 }
