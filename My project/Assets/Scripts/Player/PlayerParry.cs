@@ -6,6 +6,9 @@ using System.Collections;
 /// </summary>
 public class PlayerParry : MonoBehaviour
 {
+    [Header("プレイヤーステータス")]
+    [SerializeField] private PlayerStatus playerStatus = null;
+
     [Header("パリィ判定範囲")]
     [SerializeField] private ParryArea parryArea = null;
 
@@ -60,12 +63,17 @@ public class PlayerParry : MonoBehaviour
     private void Parry()
     {
         //
-        if (parryArea.HasEnemyBullet)
+        if (playerStatus.CanParry)
         {
             Debug.Log("パリィ成功");
 
+            playerStatus.SetParrying(true);
+
             //パリィ波動を生成
             Instantiate(parryWavePrefab, transform.position, Quaternion.identity);
+
+            //
+            StartCoroutine(ParryCoroutine());
 
             //クールタイム開始
             StartCoroutine(CooldownCoroutine());
@@ -99,5 +107,16 @@ public class PlayerParry : MonoBehaviour
         isCooldown = false;
 
         Debug.Log("クールタイム終了");
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private IEnumerator ParryCoroutine()
+    {
+        //パリィ時間
+        yield return new WaitForSeconds(0.2f);
+
+        playerStatus.SetParrying(false);
     }
 }

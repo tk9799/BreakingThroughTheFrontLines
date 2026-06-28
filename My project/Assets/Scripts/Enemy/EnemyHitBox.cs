@@ -1,12 +1,12 @@
 using UnityEngine;
 
 /// <summary>
-/// プレイヤーの当たり判定
+/// 敵の当たり判定クラス
 /// </summary>
-public class PlayerHitBox : MonoBehaviour
+public class EnemyHitBox : MonoBehaviour
 {
-    [Header("プレイヤーステータス")]
-    [SerializeField] private PlayerStatus playerStatus = null;
+    [Header("敵ステータス")]
+    [SerializeField] private EnemyStatus enemyStatus = null;
 
     /// <summary>
     /// 当たり判定処理
@@ -16,26 +16,26 @@ public class PlayerHitBox : MonoBehaviour
         //弾を取得
         BulletBase bullet = collision.GetComponent<BulletBase>();
 
-        //弾じゃない
-        if ((bullet == null))
+        //敵ステータスが設定されていない
+        if (enemyStatus == null)
         {
             return;
         }
 
-        //敵＆ボス弾以外は無視
-        if (bullet.Owner != BulletOwner.Enemy && bullet.Owner != BulletOwner.Boss)
+        //弾以外は無視
+        if (bullet == null)
         {
             return;
         }
 
-        //パリィ中はダメージを受けない
-        if (playerStatus.IsParrying)
+        //プレイヤー弾以外は無視
+        if (bullet.Owner != BulletOwner.Player)
         {
             return;
         }
 
         //ダメージ
-        playerStatus.Damage();
+        enemyStatus.Damage(1);
 
         //PoolObject取得
         PoolObject poolObject = collision.GetComponent<PoolObject>();

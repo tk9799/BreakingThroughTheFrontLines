@@ -5,5 +5,12 @@ using UnityEngine;
 /// </summary>
 public class EnemyBullet : BulletBase
 {
-
+    /// <summary>
+    /// ƒJƒƒ‰ŠO‚Éo‚½‚Ìˆ—
+    /// </summary>
+    private void OnBecameInvisible()
+    {
+        //’e‚ğíœ
+        Destroy(gameObject);
+    }
 }

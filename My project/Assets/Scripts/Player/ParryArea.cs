@@ -35,7 +35,7 @@ public class ParryArea : MonoBehaviour
         if (bullet.Owner == BulletOwner.Enemy ||
             bullet.Owner == BulletOwner.Boss)
         {
-            playerStatus.SetParry(true);
+            playerStatus.SetCanParry(true);
         }
 
         //
@@ -45,7 +45,7 @@ public class ParryArea : MonoBehaviour
         }
 
         //
-        playerStatus.SetParry(true);
+        //playerStatus.SetParrying(true);
     }
 
     /// <summary>
@@ -74,15 +74,15 @@ public class ParryArea : MonoBehaviour
         //
         if (bullets.Count == 0)
         {
-            playerStatus.SetParry(false);
+            playerStatus.SetCanParry(false);
         }
     }
 
     /// <summary>
     /// 
     /// </summary>
-    private void UpdateParryState()
-    {
-        playerStatus.SetParry(bullets.Count > 0);
-    }
+    //private void UpdateParryState()
+    //{
+    //    playerStatus.SetCanParry(bullets.Count > 0);
+    //}
 }
