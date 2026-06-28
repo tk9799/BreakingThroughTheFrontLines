@@ -15,16 +15,34 @@ public class PlayerStatus : MonoBehaviour
     //無敵状態かどうか
     private bool isInvincible = false;
 
+    //パリィ中かどうか
+    private bool isParrying = false;
+
+    //パリィ可能かどうか
+    private bool canParry = false;
+
     //SpriteRendererコンポーネント
     private SpriteRenderer spriteRenderer = null;
-
-    //
-    public bool IsParryActive { get; private set; }
 
     /// <summary>
     /// 残機
     /// </summary>
     public int Life => life;
+
+    /// <summary>
+    /// 無敵状態かどうか
+    /// </summary>
+    public bool IsInvincible => isInvincible;
+
+    /// <summary>
+    /// パリィ中かどうか
+    /// </summary>
+    public bool IsParrying => isParrying;
+
+    /// <summary>
+    /// パリィ可能かどうか
+    /// </summary>
+    public bool CanParry => canParry;
 
     /// <summary>
     /// 初期化処理
@@ -92,12 +110,19 @@ public class PlayerStatus : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// パリィ状態を設定
     /// </summary>
-    /// <param name="value"></param>
-    public void SetParry(bool value)
+    public void SetParrying(bool value)
     {
-        IsParryActive = value;
+        isParrying = value;
+    }
+
+    /// <summary>
+    /// パリィ可能状態を設定
+    /// </summary>
+    public void SetCanParry(bool value)
+    {
+        canParry = value;
     }
 
     /// <summary>

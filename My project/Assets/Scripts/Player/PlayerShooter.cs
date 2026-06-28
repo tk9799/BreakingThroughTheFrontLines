@@ -61,10 +61,11 @@ public class PlayerShooter : MonoBehaviour
     /// </summary>
     private void Shoot()
     {
-        //’e‚ğ¶¬
-        PlayerBullet bullet = Instantiate(bulletPrefab, shotPoint.position, Quaternion.identity);
+        GameObject obj = PoolManager.Instance.PlayerBulletPool.Get();
 
-        //’e‚ÌˆÚ“®•ûŒü‚ğİ’è
+        obj.transform.position = shotPoint.position;
+
+        PlayerBullet bullet = obj.GetComponent<PlayerBullet>();
         bullet.SetDirection(shotDirection);
     }
 }

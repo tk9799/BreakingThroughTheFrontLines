@@ -1,9 +1,10 @@
 using UnityEngine;
+using System.Collections;
 
 /// <summary>
 /// ’e‚ÌŠî’êƒNƒ‰ƒX
 /// </summary>
-public class BulletBase : MonoBehaviour
+public abstract class BulletBase : MonoBehaviour
 {
     [Header("’e‚ÌŠ‘®")]
     [SerializeField] protected BulletOwner owner = BulletOwner.None;
@@ -17,17 +18,52 @@ public class BulletBase : MonoBehaviour
     //’e‚ÌˆÚ“®•ûŒü
     protected Vector2 direction = Vector2.zero;
 
+    //
+    private Coroutine lifeCoroutine = null;
+
+    //
+    private PoolObject poolObj = null;
+
     /// <summary>
     /// ’e‚ÌŠ‘®
     /// </summary>
     public BulletOwner Owner => owner;
 
     /// <summary>
-    /// ‰Šú‰»ˆ—
+    /// 
     /// </summary>
-    protected virtual void Start()
+    private void Awake()
     {
-        Destroy(gameObject, lifeTime);
+        //
+        poolObj = GetComponent<PoolObject>();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private void OnEnable()
+    {
+        //
+        if (lifeCoroutine != null)
+        {
+            StopCoroutine(lifeCoroutine);
+        }
+
+        //
+        lifeCoroutine = StartCoroutine(LifeRoutine());
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private void OnDisable()
+    {
+        //
+        if (lifeCoroutine != null)
+        {
+            StopCoroutine(lifeCoroutine);
+            lifeCoroutine = null;
+        }
     }
 
     /// <summary>
@@ -44,5 +80,27 @@ public class BulletBase : MonoBehaviour
     public virtual void SetDirection(Vector2 direction)
     {
         this.direction = direction.normalized;
+    }
+
+    private IEnumerator LifeRoutine()
+    {
+        yield return new WaitForSeconds(lifeTime);
+        Despawn();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private void Despawn()
+    {
+        //
+        if (poolObj != null)
+        {
+            poolObj.Release();
+        }
+        else
+        {
+            GetComponent<PoolObject>()?.Release();
+        }
     }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8113823479604793027}
   - component: {fileID: 4852605602721949464}
   - component: {fileID: 8579730537735855772}
+  - component: {fileID: 2194448530958983847}
   - component: {fileID: 3815862525673881482}
   - component: {fileID: 4604861707137571397}
   m_Layer: 0
@@ -109,6 +110,18 @@ MonoBehaviour:
   owner: 1
   speed: 10
   lifeTime: 3
+--- !u!114 &2194448530958983847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2523150748264199897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dd06b927f865f345a09b903a674fb5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PoolObject
 --- !u!58 &3815862525673881482
 CircleCollider2D:
   m_ObjectHideFlags: 0
