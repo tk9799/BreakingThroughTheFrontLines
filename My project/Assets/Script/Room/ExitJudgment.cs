@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ExitJudgment : MonoBehaviour
 {
-    // コライダー
+    // 当たり判定を切り替えるために呼び出すコライダー
     private new Collider2D collider;
 
     [Header("部屋の入り口のオブジェクトの開閉を切り替えるクラス")]
@@ -27,8 +27,6 @@ public class ExitJudgment : MonoBehaviour
     {
         // 当たったタグがプレイヤーではない場合何もしない
         if (!collision.CompareTag("Player")) return;
-
-        //RoomManager.instance.SpawnRoom(transform.position);
     }
 
     /// <summary>

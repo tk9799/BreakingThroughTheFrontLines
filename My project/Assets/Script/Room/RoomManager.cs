@@ -49,8 +49,12 @@ public class RoomManager : MonoBehaviour
         Instantiate(roomPrefabs[index], position, Quaternion.identity);
     }
 
+    /// <summary>
+    /// 部屋を映すカメラの位置を変えるイベントを実行するメソッド
+    /// </summary>
     public void SwitchRoomCamera(EnteringRoomJudgment switchRoom)
     {
+        // イベントに登録しているカメラの位置を切り替えるメソッドを実行する
         OnSwitchRoom?.Invoke(switchRoom);
     }
 }

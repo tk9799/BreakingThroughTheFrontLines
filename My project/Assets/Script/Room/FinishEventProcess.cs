@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class FinishEventProcess : MonoBehaviour
 {
+    // イベント終了時に実行するイベント
     public event Action OnFinishEvent;
 
     // イベントが終了したかの判定
@@ -20,6 +21,7 @@ public class FinishEventProcess : MonoBehaviour
 
     private void FinishEventAction()
     {
+        // イベントを終了するときに行う処理を行う
         Debug.Log("部屋から出ることができます");
         OnFinishEvent?.Invoke();
     }

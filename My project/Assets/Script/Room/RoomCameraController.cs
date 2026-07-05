@@ -2,13 +2,11 @@ using UnityEngine;
 
 public class RoomCameraController : MonoBehaviour
 {
-    private EnteringRoomJudgment enteringRoomJudgment;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
         Debug.Log("RoomCameraController Start");
 
+        // ゲーム開始時SwitchCameraTransformメソッドをイベント登録
         RoomManager.instance.OnSwitchRoom += SwitchCameraTransform;
     }
 
