@@ -32,6 +32,7 @@ public class EnteringRoomJudgment : MonoBehaviour
         
         if (!collision.CompareTag("Player")) return;
 
+        // カメラを自分の位置に切り替えるイベントを実行する
         RoomManager.instance.SwitchRoomCamera(this);
 
         // クリア済みならイベントを開始しない
@@ -40,11 +41,13 @@ public class EnteringRoomJudgment : MonoBehaviour
             return;
         }
 
+        // プレイヤーが部屋に入ったときhasStartedEvent = true;にする
         if (!hasStartedEvent)
         {
             hasStartedEvent = true;
         }
 
+        // プレイヤーが部屋に入ったときに実行するイベントを実行する
         OnPlayerEnterRoom?.Invoke();
 
         // イベント終了になったとき
@@ -57,6 +60,10 @@ public class EnteringRoomJudgment : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// プレイヤーが部屋から出た時の判定
+    /// イベントを繰り返ししないためにboolを切り替える
+    /// </summary>
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;
