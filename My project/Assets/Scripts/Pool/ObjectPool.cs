@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
-/// オブジェクトプールクラス
+/// 同じプレハブを再利用するためのオブジェクトプール
 /// </summary>
 public class ObjectPool : MonoBehaviour
 {
@@ -24,9 +24,7 @@ public class ObjectPool : MonoBehaviour
         if (poolPrefab == null)
         {
             Debug.LogError($"{name}:PoolPrefabが設定されていません");
-
             enabled = false;
-
             return;
         }
 
@@ -45,7 +43,10 @@ public class ObjectPool : MonoBehaviour
         //足りなければ追加生成
         if (pool.Count == 0)
         {
-            CreateObject();
+            if (CreateObject() == null)
+            {
+                return null;
+            }
         }
 
         //取り出す
@@ -72,16 +73,21 @@ public class ObjectPool : MonoBehaviour
         //生成
         GameObject obj = Instantiate(poolPrefab, transform);
 
-        //
-        var poolObject = obj.GetComponent<PoolObject>();
+        //PoolObjectを取得
+        PoolObject poolObject = obj.GetComponent<PoolObject>();
 
-        //
-        if (poolObject != null)
+        //PoolObjectが無い場合はプールできない
+        if (poolObject == null)
         {
-            poolObject.SetPool(this);
+            Debug.LogError($"{poolPrefab.name}にPoolObjectがアタッチされていません。");
+            Destroy(obj);
+            return null;
         }
 
-        //非表示
+        //自分が所属するプールを登録
+        poolObject.SetPool(this);
+
+        //使用待ち状態にする
         obj.SetActive(false);
 
         //プールへ追加
@@ -98,7 +104,7 @@ public class ObjectPool : MonoBehaviour
         //既に返却済みなら何もしない
         if (!obj.activeSelf)
         {
-            Debug.LogWarning($"{obj.name} は既にプールへ返却されています。");
+            Debug.LogWarning($"{obj.name}は既にプールへ返却されています。");
             return;
         }
 
