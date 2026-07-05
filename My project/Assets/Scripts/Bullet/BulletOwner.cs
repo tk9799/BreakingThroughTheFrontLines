@@ -15,12 +15,12 @@ public enum BulletOwner
     Player,
 
     /// <summary>
-    /// ŽG‹›“G
+    /// “G
     /// </summary>
     Enemy,
 
     /// <summary>
-    /// ƒ{ƒX“G
+    /// ƒ{ƒX
     /// </summary>
     Boss
 }

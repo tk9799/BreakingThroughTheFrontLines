@@ -1,8 +1,7 @@
 using UnityEngine;
-using System.Collections;
 
 /// <summary>
-/// プールから生成されたオブジェクトを管理するクラス
+/// オブジェクトプールから生成されたオブジェクトを管理するクラス
 /// </summary>
 public class PoolObject : MonoBehaviour
 {
@@ -22,15 +21,15 @@ public class PoolObject : MonoBehaviour
     /// </summary>
     public void Release()
     {
-        //
+        //所属するプールが設定されていない場合は設定ミス
         if (pool == null)
         {
-            Debug.LogWarning($"{name}: Poolが未設定です");
+            Debug.LogError($"{name}:Poolが未設定です。");
             Destroy(gameObject);
             return;
         }
 
-        //
+        //所属するプールへ返却する
         pool.Release(gameObject);
     }
 }

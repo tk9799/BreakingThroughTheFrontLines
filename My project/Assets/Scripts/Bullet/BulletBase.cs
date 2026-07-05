@@ -2,8 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 /// <summary>
-/// 弾の基底クラス
+/// 弾の共通処理を管理する基底クラス
 /// </summary>
+[RequireComponent(typeof(PoolObject))]
 public abstract class BulletBase : MonoBehaviour
 {
     [Header("弾の所属")]
@@ -18,10 +19,10 @@ public abstract class BulletBase : MonoBehaviour
     //弾の移動方向
     protected Vector2 direction = Vector2.zero;
 
-    //
+    //生存時間を管理するコルーチン
     private Coroutine lifeCoroutine = null;
 
-    //
+    //自身をプールへ返却するためのコンポーネント
     private PoolObject poolObj = null;
 
     /// <summary>
@@ -30,35 +31,43 @@ public abstract class BulletBase : MonoBehaviour
     public BulletOwner Owner => owner;
 
     /// <summary>
-    /// 
+    /// 初期化処理
     /// </summary>
     private void Awake()
     {
-        //
+        //PoolObjectを取得
         poolObj = GetComponent<PoolObject>();
+
+        //PoolObjectが取得できなければ処理を停止
+        if (poolObj == null)
+        {
+            Debug.LogError($"{name}: PoolObjectが取得できません。");
+            enabled = false;
+            return;
+        }
     }
 
     /// <summary>
-    /// 
+    /// 弾が有効化されたときの処理
     /// </summary>
     private void OnEnable()
     {
-        //
+        //多重実行を防ぐため既存のコルーチンを停止
         if (lifeCoroutine != null)
         {
             StopCoroutine(lifeCoroutine);
         }
 
-        //
+        //生存時間のカウントを開始
         lifeCoroutine = StartCoroutine(LifeRoutine());
     }
 
     /// <summary>
-    /// 
+    /// 弾が無効化されたときの処理
     /// </summary>
     private void OnDisable()
     {
-        //
+        //実行中のコルーチンを停止
         if (lifeCoroutine != null)
         {
             StopCoroutine(lifeCoroutine);
@@ -82,25 +91,22 @@ public abstract class BulletBase : MonoBehaviour
         this.direction = direction.normalized;
     }
 
+    /// <summary>
+    /// 生存時間を管理するコルーチン
+    /// </summary>
     private IEnumerator LifeRoutine()
     {
+        //一定時間経過後にプールへ返却
         yield return new WaitForSeconds(lifeTime);
         Despawn();
     }
 
     /// <summary>
-    /// 
+    /// 弾をプールへ返却する処理
     /// </summary>
-    private void Despawn()
+    protected void Despawn()
     {
-        //
-        if (poolObj != null)
-        {
-            poolObj.Release();
-        }
-        else
-        {
-            GetComponent<PoolObject>()?.Release();
-        }
+        //プールへ返却
+        poolObj.Release();
     }
 }

@@ -61,11 +61,22 @@ public class PlayerShooter : MonoBehaviour
     /// </summary>
     private void Shoot()
     {
-        GameObject obj = PoolManager.Instance.PlayerBulletPool.Get();
+        //
+        GameObject obj = PoolManager.Instance.GetPlayerBullet();
 
+        //
+        if (obj == null)
+        {
+            return;
+        }
+
+        //
         obj.transform.position = shotPoint.position;
 
+        //
         PlayerBullet bullet = obj.GetComponent<PlayerBullet>();
+
+        //
         bullet.SetDirection(shotDirection);
     }
 }

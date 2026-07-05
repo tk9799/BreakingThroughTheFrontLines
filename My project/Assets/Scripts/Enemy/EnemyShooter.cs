@@ -61,18 +61,22 @@ public class EnemyShooter : MonoBehaviour
     /// </summary>
     private void ShootDown()
     {
-        ObjectPool pool = GetPool();
+        //
+        GameObject obj = PoolManager.Instance.GetEnemyBullet(0);
 
-        GameObject obj = PoolManager.Instance.EnemyBulletPool[0].Get();
+        //
+        if (obj == null)
+        {
+            return;
+        }
 
+        //
         obj.transform.position = shotPoint.position;
 
+        //
         EnemyBullet bullet = obj.GetComponent<EnemyBullet>();
-        bullet.SetDirection(Vector2.down);
-    }
 
-    private ObjectPool GetPool()
-    {
-        return PoolManager.Instance.EnemyBulletPool[0]; //ç°ÇÕâº
+        //
+        bullet.SetDirection(Vector2.down);
     }
 }

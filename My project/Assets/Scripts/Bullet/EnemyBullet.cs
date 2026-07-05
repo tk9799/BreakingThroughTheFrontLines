@@ -10,7 +10,7 @@ public class EnemyBullet : BulletBase
     /// </summary>
     private void OnBecameInvisible()
     {
-        //’e‚ğíœ
-        Destroy(gameObject);
+        //ƒv[ƒ‹‚Ö•Ô‹p
+        Despawn();
     }
 }
