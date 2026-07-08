@@ -1722,7 +1722,7 @@ MonoBehaviour:
     minY: -9
     maxY: 9
   enemyKinds:
-  - enemyObject: {fileID: 4927204172488274667, guid: f35576664b7f6904890f5b565c18cfe0, type: 3}
+  - enemyObject: {fileID: 5670696193371876255, guid: 48df8f90ed35a124c8527403a1246441, type: 3}
   appearNumber: 3
 --- !u!1 &7503347067428970007
 GameObject:
