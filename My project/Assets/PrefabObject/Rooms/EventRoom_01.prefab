@@ -1547,6 +1547,8 @@ GameObject:
   - component: {fileID: 8324109103955095378}
   - component: {fileID: 934142528404151414}
   - component: {fileID: 3621376412599891991}
+  - component: {fileID: 4315789591898254047}
+  - component: {fileID: 9021472034825868659}
   - component: {fileID: 6313780289237864851}
   m_Layer: 0
   m_Name: Floor
@@ -1642,6 +1644,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnteringRoomJudgment
   finishEventProcess: {fileID: 5224964441873174918}
+  eventManager: {fileID: 4315789591898254047}
+--- !u!114 &4315789591898254047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6519605103321088246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025c124814abb6f4f9bae446eb617381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EventManager
+  battleEvent: {fileID: 9021472034825868659}
+--- !u!114 &9021472034825868659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6519605103321088246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec7dfa21b92c5284289635531ffce15c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleEvent
+  appearPosition:
+    minX: -9
+    maxX: 9
+    minY: -9
+    maxY: 9
+  enemyKinds:
+  - enemyObject: {fileID: 4927204172488274667, guid: f35576664b7f6904890f5b565c18cfe0, type: 3}
+  appearNumber: 3
 --- !u!61 &6313780289237864851
 BoxCollider2D:
   m_ObjectHideFlags: 0
