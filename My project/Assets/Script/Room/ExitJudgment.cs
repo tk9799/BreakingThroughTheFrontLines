@@ -37,7 +37,7 @@ public class ExitJudgment : MonoBehaviour
     {
         collider.isTrigger = !collider.isTrigger;
 
-        Debug.Log("ドアの判定を切り替えました");
+        //Debug.Log("ドアの判定を切り替えました");
     }
     
 }

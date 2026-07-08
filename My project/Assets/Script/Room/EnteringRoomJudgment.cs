@@ -18,6 +18,8 @@ public class EnteringRoomJudgment : MonoBehaviour
 
     [SerializeField] private FinishEventProcess finishEventProcess;
 
+    [SerializeField] private EventManager eventManager;
+
     private void Start()
     {
         isPlayerRoomm = false;
@@ -27,7 +29,7 @@ public class EnteringRoomJudgment : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isEntered) return;
-        Debug.Log("•”‰®‚É“ü‚è‚Ü‚µ‚½");
+        //Debug.Log("•”‰®‚É“ü‚è‚Ü‚µ‚½");
         isPlayerRoomm = true;
         
         if (!collision.CompareTag("Player")) return;
@@ -44,6 +46,7 @@ public class EnteringRoomJudgment : MonoBehaviour
         // ƒvƒŒƒCƒ„[‚ª•”‰®‚É“ü‚Á‚½‚Æ‚«hasStartedEvent = true;‚É‚·‚é
         if (!hasStartedEvent)
         {
+            eventManager.EventDecision();
             hasStartedEvent = true;
         }
 
