@@ -1,15 +1,14 @@
+using JetBrains.Annotations;
+using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 敵を出現させる座標
+/// </summary>
 [System.Serializable]
-public class RandomAppearPosition
+public class EnemySpawnPattern
 {
-    public float minX = 0.0f;
-
-    public float maxX = 0.0f;
-
-    public float minY = 0.0f;
-
-    public float maxY = 0.0f;
+    public Transform[] spawnPosition;
 }
 
 [System.Serializable]
@@ -20,22 +19,17 @@ public class EnemyKinds
 
 public class BattleEvent : MonoBehaviour
 {
-    [SerializeField] public RandomAppearPosition appearPosition;
 
     [SerializeField] public EnemyKinds[] enemyKinds;
 
+    [SerializeField] public EnemySpawnPattern[] spawnPatterns;
+
     [SerializeField] private int appearNumber = 0;
 
-    
-    public Vector3 GetRandomPosition()
-    {
-        float randomX = Random.Range(appearPosition.minX, appearPosition.maxX);
-
-        float randomY = Random.Range(appearPosition.minY, appearPosition.maxY);
-
-        return new Vector3(randomX, randomY, 0.0f);
-    }
-
+    /// <summary>
+    /// 出現させる敵をランダムに選ぶ
+    /// </summary>
+    /// <returns></returns>
     public GameObject GetRandomEnemyObject()
     {
         int appearEnemyNumber= Random.Range(0, enemyKinds.Length);
@@ -45,13 +39,25 @@ public class BattleEvent : MonoBehaviour
 
     public void AppearEnemy()
     {
-        for(int i = 0; i < appearNumber; i++)
+        EnemySpawnPattern pattern = spawnPatterns[Random.Range(0, spawnPatterns.Length)];
+
+        List<Transform> spawnPoints = new List<Transform>(pattern.spawnPosition);
+
+        // 配列の一番小さい番号を探す
+        int spawnCount = Mathf.Min(appearNumber, spawnPoints.Count);
+
+        // 出現させる敵の数だけ敵を配置
+        for (int i = 0; i < spawnCount; i++)
         {
-            Vector3 randomPosition = GetRandomPosition();
+            int index = Random.Range(0, spawnPoints.Count);
 
-            GameObject enemy = GetRandomEnemyObject();
+            // index番目の配列の座標を取得
+            Transform spawnPoint = spawnPoints[index];
 
-            Instantiate(enemy, randomPosition, Quaternion.identity);
+            Instantiate(GetRandomEnemyObject(),spawnPoint.position , Quaternion.identity);
+
+            // 出現位置が被らないように削除
+            spawnPoints.RemoveAt(index);
         }
     }
 }
