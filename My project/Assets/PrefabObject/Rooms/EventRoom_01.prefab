@@ -1744,6 +1744,8 @@ MonoBehaviour:
     - {fileID: 7602282023900945953}
     - {fileID: 6419090997609511253}
     - {fileID: 304002899449101893}
+  spawnPositionsData:
+  - {fileID: 11400000, guid: 9d228c144d85f4f40b55426bcb769323, type: 2}
   appearNumber: 3
 --- !u!61 &6313780289237864851
 BoxCollider2D:
