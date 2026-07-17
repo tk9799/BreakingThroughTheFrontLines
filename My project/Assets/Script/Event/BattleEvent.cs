@@ -24,6 +24,8 @@ public class BattleEvent : MonoBehaviour
 
     [SerializeField] public EnemySpawnPattern[] spawnPatterns;
 
+    [SerializeField] private SpawnPositionsData[] spawnPositionsData;
+
     [SerializeField] private int appearNumber = 0;
 
     /// <summary>
@@ -41,23 +43,33 @@ public class BattleEvent : MonoBehaviour
     {
         EnemySpawnPattern pattern = spawnPatterns[Random.Range(0, spawnPatterns.Length)];
 
+        SpawnPositionsData spawnData = spawnPositionsData[Random.Range(0, spawnPatterns.Length)];
+
         List<Transform> spawnPoints = new List<Transform>(pattern.spawnPosition);
 
         // 配列の一番小さい番号を探す
-        int spawnCount = Mathf.Min(appearNumber, spawnPoints.Count);
+        //int spawnCount = Mathf.Min(appearNumber, spawnPoints.Count);
+
+        foreach(Vector2 spawnDataPosition in spawnData.spawnPosition)
+        {
+            GameObject enemyObject = enemyKinds[Random.Range(0,enemyKinds.Length)].enemyObject;
+
+            Instantiate(enemyObject, transform.position + (Vector3)spawnDataPosition, Quaternion.identity);
+            Debug.Log(enemyObject.transform.position);
+        }
 
         // 出現させる敵の数だけ敵を配置
-        for (int i = 0; i < spawnCount; i++)
-        {
-            int index = Random.Range(0, spawnPoints.Count);
+        //for (int i = 0; i < spawnCount; i++)
+        //{
+        //    int index = Random.Range(0, spawnPoints.Count);
 
-            // index番目の配列の座標を取得
-            Transform spawnPoint = spawnPoints[index];
+        //    // index番目の配列の座標を取得
+        //    Transform spawnPoint = spawnPoints[index];
 
-            Instantiate(GetRandomEnemyObject(),spawnPoint.position , Quaternion.identity);
+        //    Instantiate(GetRandomEnemyObject(),spawnPoint.position , Quaternion.identity);
 
-            // 出現位置が被らないように削除
-            spawnPoints.RemoveAt(index);
-        }
+        //    // 出現位置が被らないように削除
+        //    spawnPoints.RemoveAt(index);
+        //}
     }
 }

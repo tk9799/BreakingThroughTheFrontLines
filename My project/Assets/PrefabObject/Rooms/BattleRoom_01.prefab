@@ -1821,6 +1821,9 @@ MonoBehaviour:
     - {fileID: 8192473260442945069}
     - {fileID: 2932274185217077872}
     - {fileID: 2274314803676250300}
+  spawnPositionsData:
+  - {fileID: 11400000, guid: 9d228c144d85f4f40b55426bcb769323, type: 2}
+  - {fileID: 11400000, guid: 9d228c144d85f4f40b55426bcb769323, type: 2}
   appearNumber: 3
 --- !u!1 &7503347067428970007
 GameObject:
