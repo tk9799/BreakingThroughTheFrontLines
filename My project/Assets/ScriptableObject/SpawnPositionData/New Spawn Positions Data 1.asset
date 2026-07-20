@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4056e526b7caf6a44a19d1716a87e40b, type: 3}
-  m_Name: New Spawn Positions Data
+  m_Name: New Spawn Positions Data 1
   m_EditorClassIdentifier: Assembly-CSharp::SpawnPositionsData
   spawnPosition:
   - {x: -3, y: 5}
-  - {x: 5, y: 5}
-  enemyCount: 2
+  - {x: 4, y: -1}
+  - {x: 1, y: 4}
+  enemyCount: 3

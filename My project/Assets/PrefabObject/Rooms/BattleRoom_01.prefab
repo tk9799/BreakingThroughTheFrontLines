@@ -1823,7 +1823,7 @@ MonoBehaviour:
     - {fileID: 2274314803676250300}
   spawnPositionsData:
   - {fileID: 11400000, guid: 9d228c144d85f4f40b55426bcb769323, type: 2}
-  - {fileID: 11400000, guid: 9d228c144d85f4f40b55426bcb769323, type: 2}
+  - {fileID: 11400000, guid: f1048bcc4ba9b384ab358dbd58fa6d78, type: 2}
   appearNumber: 3
 --- !u!1 &7503347067428970007
 GameObject:

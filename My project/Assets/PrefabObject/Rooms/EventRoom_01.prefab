@@ -1738,14 +1738,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BattleEvent
   enemyKinds:
   - enemyObject: {fileID: 5670696193371876255, guid: 48df8f90ed35a124c8527403a1246441, type: 3}
-  spawnPatterns:
-  - spawnPosition:
-    - {fileID: 3008050830169041216}
-    - {fileID: 7602282023900945953}
-    - {fileID: 6419090997609511253}
-    - {fileID: 304002899449101893}
   spawnPositionsData:
   - {fileID: 11400000, guid: 9d228c144d85f4f40b55426bcb769323, type: 2}
+  - {fileID: 11400000, guid: f1048bcc4ba9b384ab358dbd58fa6d78, type: 2}
   appearNumber: 3
 --- !u!61 &6313780289237864851
 BoxCollider2D:
