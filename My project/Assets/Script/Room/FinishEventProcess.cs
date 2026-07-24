@@ -9,6 +9,8 @@ public class FinishEventProcess : MonoBehaviour
     // イベントが終了したかの判定
     public bool isFinish = false;
 
+    [SerializeField] NonCombatEventData eventData;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Player")) return;
@@ -23,6 +25,9 @@ public class FinishEventProcess : MonoBehaviour
     {
         // イベントを終了するときに行う処理を行う
         Debug.Log("部屋から出ることができます");
+
+        EventUIManager.Instance.OpenPanel(eventData);
+
         OnFinishEvent?.Invoke();
     }
 }
