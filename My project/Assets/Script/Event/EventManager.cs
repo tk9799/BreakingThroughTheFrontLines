@@ -3,7 +3,7 @@ using UnityEngine;
 public enum EventType
 {
     BattleEvent,    // 戦闘イベント
-    Detour          // 寄り道イベント
+    NonCombat          // 非戦闘イベント
 }
 
 public class EventManager : MonoBehaviour
@@ -28,7 +28,7 @@ public class EventManager : MonoBehaviour
                 battleEvent.AppearEnemy();
                 break;
 
-            case EventType.Detour:
+            case EventType.NonCombat:
                 Debug.Log("非戦闘イベント開始");
                 break;
         }
