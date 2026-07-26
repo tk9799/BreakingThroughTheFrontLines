@@ -14,22 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CommentTable
   comments:
   - comment: aaaaaa
-    minSpeed: 3
-    maxSpeed: 5
+    minSpeed: 30
+    maxSpeed: 50
     prioruty: 0
   - comment: bbbbbb
-    minSpeed: 1
-    maxSpeed: 6
+    minSpeed: 100
+    maxSpeed: 160
     prioruty: 0
   - comment: cccccc
-    minSpeed: 2
-    maxSpeed: 3
+    minSpeed: 200
+    maxSpeed: 300
     prioruty: 0
   - comment: ddddddddddd
-    minSpeed: 4
-    maxSpeed: 8
+    minSpeed: 140
+    maxSpeed: 180
     prioruty: 0
   - comment: eeeeeeeee
-    minSpeed: 1
-    maxSpeed: 9
+    minSpeed: 100
+    maxSpeed: 190
     prioruty: 0

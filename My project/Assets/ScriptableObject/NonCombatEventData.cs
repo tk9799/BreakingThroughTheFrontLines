@@ -20,6 +20,8 @@ public enum UpgradeStatusType
 [CreateAssetMenu(menuName = "ScriptableObject/NonConbatEventData")]
 public class NonCombatEventData : ScriptableObject
 {
+    public CommentTable commentTable;
+
     public NonCombatEventKinds eventType;
 
     public List<UpgradeStatusType> upgradeList;

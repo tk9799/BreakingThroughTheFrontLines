@@ -9,6 +9,12 @@ public class CommentMove : MonoBehaviour
 
     private float speed;
 
+    private void Awake()
+    {
+        rectTransform = GetComponent<RectTransform>();
+        text = GetComponent<TMP_Text>();
+    }
+
     public void Initialize(CommentData data)
     {
         text.text = data.comment;

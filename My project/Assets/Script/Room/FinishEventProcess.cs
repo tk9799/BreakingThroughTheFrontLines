@@ -26,7 +26,7 @@ public class FinishEventProcess : MonoBehaviour
         // イベントを終了するときに行う処理を行う
         Debug.Log("部屋から出ることができます");
 
-        EventUIManager.Instance.OpenPanel(eventData);
+        //EventUIManager.Instance.OpenPanel(eventData);
 
         OnFinishEvent?.Invoke();
     }
