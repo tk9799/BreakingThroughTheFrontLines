@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99b45e0c9f3cd1d4fbe2417ca59deb9d, type: 3}
+  m_Name: New Comment Table
+  m_EditorClassIdentifier: Assembly-CSharp::CommentTable
+  comments:
+  - comment: aaaaaa
+    minSpeed: 3
+    maxSpeed: 5
+    prioruty: 0
+  - comment: bbbbbb
+    minSpeed: 1
+    maxSpeed: 6
+    prioruty: 0
+  - comment: cccccc
+    minSpeed: 2
+    maxSpeed: 3
+    prioruty: 0
+  - comment: ddddddddddd
+    minSpeed: 4
+    maxSpeed: 8
+    prioruty: 0
+  - comment: eeeeeeeee
+    minSpeed: 1
+    maxSpeed: 9
+    prioruty: 0
