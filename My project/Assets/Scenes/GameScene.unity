@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u53F3\u30AF\u30EA\u30C3\u30AF\u3067\u6B21\u306E\u4F1A\u8A71"
+  m_text: "\u5DE6\u30AF\u30EA\u30C3\u30AF\u3067\u6B21\u306E\u4F1A\u8A71"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c68502d084b0eed42af0ce9bc959e629, type: 2}
   m_sharedMaterial: {fileID: 1254162767720407703, guid: c68502d084b0eed42af0ce9bc959e629, type: 2}
@@ -1276,14 +1276,14 @@ RectTransform:
   m_GameObject: {fileID: 835433791}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 293108201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 300, y: 200}
+  m_AnchoredPosition: {x: 600, y: 600}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &835433793
