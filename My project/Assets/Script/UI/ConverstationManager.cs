@@ -51,7 +51,7 @@ public class ConverstationManager : MonoBehaviour
 
     private void Start()
     {
-        converstationUI.SetActive(false);
+        //converstationUI.SetActive(false);
     }
 
     private void Update()
